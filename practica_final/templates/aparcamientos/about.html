@@ -1,0 +1,27 @@
+{% extends "index.html" %}
+
+{% block content %}
+
+<div class="gradient" style="width:750px; position:relative; right: 20%;">
+  <a name="fluidity"></a>
+  <h1>About</h1></br>
+      <ul>
+        <h2><strong>Autor: </strong></h2> Guillermo Culebras Talaya.</br>
+        <h2><strong>Grado: </strong></h2> Ingeniería en Tecnologías de la Telecomunicación</br>
+        <h2><strong>Funcionalidad básica: </strong></h2></br>
+        <p> Recurso "/": Muestra una lista con los 5 alojamientos con mas comentarios, si no hay 5 aparcamientos comentados, se muestran solo los que lo estén. También se muestra la lista de las paginas de todos los usuarios. </p> </br>
+
+        <p> Recurso "/usuario": Muestra la pagina del usuario, en la que se muestran los aparcamientos seleccionados y la fecha de su selección. </p> </br>
+
+        <p> Recurso "/aparcamientos": Muestra la lista de aparcamientos disponibles, pudiendolos filtar por distrito y si son accesibles o no. </p> </br>        
+        
+        <p> Recurso "/aparcamientos/id": Muestra la pagina del aparcamiento al que corresponde esa id con toda su informacion. Si el usuario esta registrado tambien muestra la posibilidad de escribir un comentario. </p> </br>
+
+        <p> Recurso "/usuario/xml": Muestra el canal XML de los aparcamientos seleccionados por el usuario.</p> </br>
+
+        <p> Recurso "/about": Pagina con informacion de la autoría de la práctica y explicación del funcionamiento. </p> </br>
+      
+    </ul>
+</div>
+
+{% endblock content %}

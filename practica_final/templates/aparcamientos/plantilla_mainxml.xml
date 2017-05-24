@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<parkinglist>
+	<titulo>
+		Canal XML de la pagina principal
+	</titulo>
+	{% for aparcamiento in aparcamientos %}
+	<parking>
+		<nombre>{{aparcamiento.nombre}}</nombre>
+		<direccion>{{aparcamiento.direccion}}</direccion>
+		<web>{{aparcamiento.enlace}}</web>
+		<informacion>/aparcamientos/{{aparcamiento.id}}</informacion>
+	</parking>
+	{% endfor %}
+	<paginasusuario>
+		{% for usuario, titulo in usuarios %}
+		<usuario>
+			<nombre>{{usuario}}</nombre>
+			<web>{{titulo}}</web>
+		</usuario>
+		{% endfor %}
+	</paginasusuario>	
+</parkinglist>

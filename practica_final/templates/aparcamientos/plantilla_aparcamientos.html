@@ -1,0 +1,98 @@
+{% extends "index.html" %}
+
+{% block content %}
+
+<div class="gradient" style="width:750px; position:relative; right: 20%;">
+  <a name="fluidity"></a>
+  <h1>Lista de todos los aparcamientos disponibles en Madrid</h1></br>
+  <form action="/filtparking" method="POST" style="position:relative; left: 25%;">{% csrf_token %}
+
+    <select id="distrito" name="distrito">
+      <option value="todos" selected="selected">- select -</option>
+      <option value="CENTRO">CENTRO</option>
+      <option value="CHAMARTIN">CHAMARTIN</option>
+      <option value="TETUAN">TETUAN</option>
+      <option value="MONCLOA-ARAVACA">MONCOLOA-ARAVACA</option>
+      <option value="RETIRO">RETIRO</option>
+      <option value="SALAMANCA">SALAMANCA</option>
+      <option value="MORATALAZ">MORATALAZ</option>
+      <option value="CHAMBERI">CHAMBERI</option>
+      <option value="SAN BLAS-CANILLEJAS">SAN BLAS-CANILLEJAS</option>
+      <option value="CIUDAD LINEAL">CIUDAD LINEAL</option>
+      <option value="FUENCARRAL-EL PARDO">FUENCARRAL-EL PARDO</option>
+      <option value="ARGANZUELA">ARGANZUELA</option>
+      <option value="VILLA DE VALLECAS">VILLA DE VALLECAS</option>
+      <option value="LATINA">LATINA</option>
+      <option value="HORTALEZA">HORTALEZA</option>
+      <option value="PUENTE DE VALLECAS">PUENTE DE VALLECAS</option>
+      <option value="CARABANCHEL">CARABANCHEL</option>
+      <option value="VILLAVERDE">VILLAVERDE</option>
+      <option value="BARAJAS">BARAJAS</option>
+      <option value="VICALVARO">VICALVARO</option>
+      <option value="USERA">USERA</option>
+    </select>
+    <input type="submit" value="Filtra por distrito" style="background-color: #000000;
+      border: 2px solid yellow;
+      border-radius: 5px;
+      box-shadow: 0px 0px 0px 1px rgba(255, 115, 100, 0.4) inset, 0px 1px 3px #333;
+      color: white;
+      font: bold 20px/1 "helvetica neue",helvetica,arial,sans-serif;
+      padding: 12px 0px 14px;
+      text-align: center;
+      text-shadow: 0px -1px 1px rgba(0, 0, 0, 0.8);
+      width: 150px;"/>
+  </form>
+  <form action="/filtparking" method="POST" style="position:relative; left: 25%;">{% csrf_token %}
+    <select id="accesible" name="accesible">
+      <option value="todos" selected="selected">- select -</option>
+      <option value="SI">Accesible</option>
+      <option value="NO">No accesible</option>
+    </select>
+
+    <input type="submit" value="Filtra por accesibilidad" style="background-color: #000000;
+      border: 2px solid yellow;
+      border-radius: 5px;
+      box-shadow: 0px 0px 0px 1px rgba(255, 115, 100, 0.4) inset, 0px 1px 3px #333;
+      color: white;
+      font: bold 20px/1 "helvetica neue",helvetica,arial,sans-serif;
+      padding: 12px 0px 14px;
+      text-align: center;
+      text-shadow: 0px -1px 1px rgba(0, 0, 0, 0.8);
+      width: 150px;"/>
+  </form></br>
+  <ul class = "indexlist">
+  {% if aparcamientos == empty %}
+    {% for aparcamiento in todos %}
+      <div class="5aparcamientos">
+          <item>
+            <div class="aparcamiento" style="width:800px;">
+              <a href="{{aparcamiento.enlace}}"><h2>{{aparcamiento.nombre|striptags|safe}}</h2></a>
+            </div>
+            <blockquote class="go">
+              <a href="/aparcamiento/{{aparcamiento.id}}"><strong>Visita la pagina del aparcamiento</strong></a>
+            </blockquote>
+          </item>
+        </br><hr class="separator" style="width:800px;">
+    </div>
+    {% endfor %}
+  {% else %}
+    {% for aparcamiento in aparcamientos %}
+      <div class="5aparcamientos">
+          <item>
+            <div class="aparcamiento" style="width:800px;">
+              <a href="{{aparcamiento.enlace}}"><h2>{{aparcamiento.nombre|striptags|safe}}</h2></a>
+            </div>
+            <blockquote class="go">
+              <a href="/aparcamientos/{{aparcamiento.id}}"><strong>Visita la pagina del aparcamiento</strong></a>
+            </blockquote>
+          </item>
+        </br><hr class="separator" style="width:800px;">
+    </div>
+    {% empty %}
+      <p> No hay coincidencias con los criterios de busqueda</p>
+    {% endfor %}
+  {% endif %}
+  </ul>
+</div>
+
+{% endblock content %}

@@ -1,0 +1,75 @@
+{% extends "index.html" %}
+
+{% block content %}
+
+<div class="gradient">
+  <a name="fluidity"></a>
+  {% if titulo == "" %}
+    <h1>Pagina de {{usuario|striptags|safe}}</h1>
+    {% if request.user.is_authenticated and request.user.username == usuario %}
+    </br>
+    <form action="/cambiartitulo" method="POST">{% csrf_token %}
+        <label for="titulo">Cambia el titulo de tu pagina personal:</label>
+        <input type="text" name="titulo" value="" id="titulo" style = "width:400px; height:20px;
+          border-width:thick; border-style:solid; border-color:black">
+       <input type="submit" value="Cambiar" style="background-color: #000000;
+            border: 2px solid yellow;
+            border-radius: 5px;
+            box-shadow: 0px 0px 0px 1px rgba(255, 115, 100, 0.4) inset, 0px 1px 3px #333;
+            color: white;
+            font: bold 20px/1 "helvetica neue",helvetica,arial,sans-serif;
+            padding: 12px 0px 14px;
+            text-align: center;
+            text-shadow: 0px -1px 1px rgba(0, 0, 0, 0.8);
+            width: 150px;"/>
+    </form>
+    </br>
+  {% endif %}
+  {% else %}
+    <h1>{{titulo|striptags|safe}}</h1>
+    {% if request.user.is_authenticated and request.user.username == usuario %}
+    </br>
+    <form action="/cambiartitulo" method="POST">{% csrf_token %}
+        <label for="titulo"><h2>Cambia el titulo de tu pagina personal</h2></label>
+        <input type="text" name="titulo" value="" id="titulo" style = "width:400px; height:20px;
+          border-width:thick; border-style:solid; border-color:black">
+        <input type="submit" value="Cambiar" style="background-color: #000000;
+          border: 2px solid yellow;
+          border-radius: 5px;
+          box-shadow: 0px 0px 0px 1px rgba(255, 115, 100, 0.4) inset, 0px 1px 3px #333;
+          color: white;
+          font: bold 20px/1 "helvetica neue",helvetica,arial,sans-serif;
+          padding: 12px 0px 14px;
+          text-align: center;
+          text-shadow: 0px -1px 1px rgba(0, 0, 0, 0.8);
+          width: 150px;"/>
+    </form>
+    </br>
+    {% endif %}
+  {% endif %}
+  <ul class = "indexlist">
+    {% for aparcamiento in aparcamientos %}
+      <div class="5aparcamientos">
+        <li>
+          <item>
+            <div class="aparcamiento">
+              <a href="{{aparcamiento.aparcamiento_id.enlace}}"><h2>{{aparcamiento.aparcamiento_id.nombre|striptags|safe}}</h2></a>
+              <p><strong>Direccion:  </strong>{{aparcamiento.aparcamiento_id.direccion|striptags|safe}}</p>
+              <p><strong>Fecha de seleccion:  </strong>{{aparcamiento.fecha}}</p>
+            </div>
+            <blockquote class="go">
+              <a href="/aparcamientos/{{aparcamiento.aparcamiento_id.id}}"><strong> Pagina del aparcamiento</strong></a>
+            </blockquote>
+          </item>
+        </li></br><hr class="separator">
+
+
+    {% empty %}
+      <p> No hay ningun aparcamiento seleccionado :'(</p>
+    {% endfor %}
+  </ul>
+  <a href="/{{usuario}}/xml"><h2><strong> Canal XML de este usuario </strong></h2></a>
+</div>
+</div>
+
+{% endblock content %}

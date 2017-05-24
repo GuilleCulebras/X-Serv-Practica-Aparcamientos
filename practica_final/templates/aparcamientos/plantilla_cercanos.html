@@ -1,0 +1,46 @@
+{% extends "index.html" %}
+
+{% block content %}
+
+<div class="gradient" style="width:750px; position:relative; right: 20%;">
+  <a name="fluidity"></a>
+  <h1>Busca los alojamientos mas cercanos!</h1></br>
+  </br>
+  <form action="/ordenarCP" method="POST" style="position:relative; left: 35%;">{% csrf_token %}
+      <label for="titulo">Introduce el codigo postal</label>
+      <input type="text" name="cp" value="" id="cp" style = "width:250px; height:20px;
+        border-width:thick; border-style:solid; border-color:#336666">
+      <input type="submit" value="Busca" style="background-color: #006666;
+        border: 1px solid #003333;
+        border-radius: 5px;
+        box-shadow: 0px 0px 0px 1px rgba(255, 115, 100, 0.4) inset, 0px 1px 3px #333;
+        color: #000;
+        font: bold 20px/1 "helvetica neue",helvetica,arial,sans-serif;
+        padding: 12px 0px 14px;
+        text-align: center;
+        text-shadow: 0px -1px 1px rgba(0, 0, 0, 0.8);
+        width: 150px;"/>
+  </form>
+  </br>
+  <ul class = "indexlist">
+    {% for alojamiento in alojamientos %}
+      <div class="10alojamientosCom">
+          <item>
+            <div class="alojamiento" style="width:800px;">
+              <a href="{{alojamiento.url}}"><h2>{{alojamiento.nombre|striptags|safe}}</h2></a>
+              <p><strong>Donde esta:  </strong>{{alojamiento.direccion|striptags|safe}}</p>
+            </div>
+            <blockquote class="go">
+              <a href="/alojamientos/{{alojamiento.id}}"><strong>Visita la pagina de este alojamiento</strong></a>
+            </blockquote>
+          </item>
+        </br><hr class="separator" style="width:800px;">
+    </div>
+    {% empty %}
+      <p> No hay alojamientos que coincidan con tu busqueda </p>
+    {% endfor %}
+
+  </ul>
+</div>
+
+{% endblock content %}

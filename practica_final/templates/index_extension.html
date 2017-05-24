@@ -1,0 +1,49 @@
+{% extends "index.html" %}
+
+{% block content %}
+
+<div class="gradient">
+  <a name="fluidity"></a>
+  <h1>Aparcamientos con mas comentarios</h1>
+  <ul class = "indexlist">
+    {% for aparcamiento in aparcamientos %}
+      <div class="5aparcamientos">
+        <li>
+          <item>
+            <div class="aparcamiento">
+              <a href="{{aparcamiento.enlace}}"><h2>{{aparcamiento.nombre|striptags|safe}}</h2></a>
+              <p><strong>Direccion:  </strong>{{aparcamiento.direccion|striptags|safe}}</p>
+            </div>
+            <blockquote class="go">
+              <a href="/aparcamientos/{{aparcamiento.id}}"><strong> Mas informacion</strong></a>
+            </blockquote>
+          </item>
+        </li></br><hr class="separator">
+    </div>
+    {% empty %}
+      <p> No hay aparcamientos comentados </p>
+    {% endfor %}
+  </ul>
+    <a href="/rsschannel"><h2><strong> Canal RSS </strong></h2></a>
+    <a href="/main/xml"><h2><strong> Canal XML de la Pagina Principal </strong></h2></a>
+</div>
+
+{% endblock content %}
+
+
+{% block left %}
+
+<div class="width100 floatLeft leftColumn">
+  <h2>PAGINAS PERSONALES</h2>
+  <ul class="sideMenu">
+    <li class="here">
+      {% for usuario,titulo in usuarios %}
+      <ul>
+        <li><a href="/{{usuario}}" title="Pagina usuario">{{titulo|striptags|safe}}</a></li>
+      </ul>
+      {% endfor %}
+    </li>
+  </ul>
+</div>
+
+{% endblock left %}

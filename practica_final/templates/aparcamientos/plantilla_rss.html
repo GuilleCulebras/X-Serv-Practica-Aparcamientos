@@ -1,0 +1,24 @@
+{% extends "index.html" %}
+
+{% block content %}
+
+<div class="gradient">
+  <a name="fluidity"></a>
+  <h1>Canal RSS</h1>
+  <h3 class = "indexlist">
+      &lt;?xml version="1.0" encoding="UTF-8" ?&gt;</br>
+      &lt;rss version="2.0"&gt;</br>
+      &lt;channel&gt;</br>
+      &lt;title&gt;Main page RSS channel&lt;/title&gt;</br>
+      {% for comentario in comentarios %}
+      &lt;item&gt;</br>
+      &lt;title&gt;{{comentario.aparcamiento_id.nombre|striptags|safe}}&lt;/title&gt;</br>
+      &lt;comment&gt;{{comentario.texto|striptags|safe}}&lt;/comment&gt;</br>
+      &lt;/item&gt;</br>
+      {% endfor %}
+      &lt;/channel&gt;</br>
+      &lt;/rss&gt;</br>
+  </h3>
+</div>
+
+{% endblock content %}

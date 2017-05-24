@@ -1,0 +1,35 @@
+{% extends "index.html" %}
+
+{% block content %}
+
+<div class="gradient">
+  <a name="fluidity"></a>
+  <h1>Regístrate en la página</h1>
+  <ul class = "indexlist">
+   <div id="register">
+   	<form action="" method="POST">{% csrf_token %}
+   		<div id="name">
+   			<label for="username">Nombre de usuario</label>
+   			<input type="text" name="username" value="" autocomplete="off"/>
+   		</div>
+   		<div id="password">
+   			<label for="username">Contraseña</label>
+   			<input name="password" type="password" value="" />
+   		</div>
+   		</br>
+   		<input type="submit" value="Registrarse" class="submitbutton" style="background-color: #000000;
+              border: 1px solid yellow;
+              border-radius: 5px;
+              box-shadow: 0px 0px 0px 1px rgba(255, 115, 100, 0.4) inset, 0px 1px 3px #333;
+              color: white;
+              font: bold 20px/1 "helvetica neue",helvetica,arial,sans-serif;
+              padding: 12px 0px 14px;
+              text-align: center;
+              text-shadow: 0px -1px 1px rgba(0, 0, 0, 0.8);
+              width: 150px;" />   		
+   	</form>
+   </div>
+  </ul>
+</div>
+
+{% endblock content %}

@@ -1,0 +1,61 @@
+{% extends "index.html" %}
+
+{% block content %}
+
+<div class="gradient" style="width:700px; position:relative; right: 20%;">
+  <a name="fluidity"></a>
+  <h1>{{aparcamiento.nombre|striptags|safe}}</h1>
+  <ul class = "indexlist">
+      <div class="5aparcamientos">
+          <item>
+            <div class="alojamiento" style="width:750px;">
+              <h3><strong>Direccion:  </strong>{{aparcamiento.direccion|striptags|safe}}</h3>
+              <h3><strong>Barrio:  </strong>{{aparcamiento.barrio|striptags|safe}}</h3>
+              <h3><strong>Distrito:  </strong>{{aparcamiento.distrito|striptags|safe}}</h3>
+              <h3><strong>Accesibilidad:  </strong>{{aparcamiento.access|striptags|safe}}</h3>
+              <h3><strong>Contacto:  </strong>{{aparcamiento.contacto|striptags|safe}}</h3>
+              <h3><strong>Latitud:  </strong>{{aparcamiento.latitud|striptags|safe}}</h3>
+              <h3><strong>Longitud:  </strong>{{aparcamiento.longitud|striptags|safe}}</h3>
+              <strong>Este aparcamiento ya lo has seleccionado, no puedes volverlo a hacer</strong>
+              <p>{{aparcamiento.descripcion|striptags|safe}}</p>
+            </div>
+            
+            <div class="comentarios" style="width:750px;">
+            {% ifnotequal comentarios "" %}
+              <h2><strong>Comentarios del aparcamiento: </strong></h2>
+              <ul>
+              {% for comentario in comentarios %}
+                <li><p>{{comentario.texto|striptags|safe}}<br/></p></li>
+              {% endfor %}
+              {% if request.user.is_authenticated %}
+              </br>
+              <form action="/addcomment/{{aparcamiento.id}}" method="POST">{% csrf_token %}
+                  <label for="comentario"><h3><strong>Escribe un comentario para este aparcamiento: </strong></h3></label>
+                   <input type="text" name="comentario" value="" id="comentario" style = "width:500px; height:75px;
+                    border-width:thick; border-style:solid; border-color:black"></br>
+                  <input type="submit" value="Enviar" style="background-color: #000000;
+                    border: 2px solid yellow;
+                    border-radius: 5px;
+                    box-shadow: 0px 0px 0px 1px rgba(255, 115, 100, 0.4) inset, 0px 1px 3px #333;
+                    color: white;
+                    font: bold 20px/1 "helvetica neue",helvetica,arial,sans-serif;
+                    padding: 12px 0px 14px;
+                    text-align: center;
+                    text-shadow: 0px -1px 1px rgba(0, 0, 0, 0.8);
+                    width: 150px;"/>
+              </form>
+               {% endif %}
+            </div>
+              </br>
+              </ul>
+            {%  endifnotequal %}
+            <blockquote class="go">
+              <a href="{{aparcamiento.enlace}}"><strong>Visita la web del aparcamiento</strong></a>
+            </blockquote>
+          </item>
+        </br><hr class="separator">
+    </div>
+  </ul>
+</div>
+
+{% endblock content %}
